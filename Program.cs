@@ -1,12 +1,14 @@
 ﻿using System;
+using Integrator.WebService;
 
-namespace integrator
+namespace Integrator
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+      var dataFetcher = new DataFetcher();
+      dataFetcher.FetchData();
     }
+  }
 }
