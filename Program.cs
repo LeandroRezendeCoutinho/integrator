@@ -7,8 +7,14 @@ namespace Integrator
   {
     static void Main(string[] args)
     {
-      var dataFetcher = new DataFetcher();
-      dataFetcher.FetchData();
+      for (int i = 0; i < 10_000; i++)
+      {
+        var dataFetcher = new DataFetcher();
+        var dataProcessor = new DataProcessor();
+        var saleList = dataFetcher.FetchData();
+        var computedLIst = dataProcessor.Process(saleList);
+        Console.WriteLine("Integration " + i);
+      }
     }
   }
 }
