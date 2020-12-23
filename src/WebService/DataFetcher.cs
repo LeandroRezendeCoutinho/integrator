@@ -1,23 +1,20 @@
-using RestSharp;
 using System.Text.Json;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace Integrator.WebService
 {
-  class DataFetcher
-  {
-    public List<Sale> FetchData()
+    class DataFetcher
     {
-      var client = new RestClient("http://localhost:4567");
-      var request = new RestRequest("data", DataFormat.Json);
-      var response = client.Get(request);
+        public List<Sale> FetchData()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync("http://localhost:4567/data").Result;
+                var stream = response.Content.ReadAsStringAsync().Result;
 
-      return DeserializeRequest(response);
+                return JsonSerializer.Deserialize<List<Sale>>(stream);
+            }            
+        }
     }
-
-    private List<Sale> DeserializeRequest(IRestResponse response)
-    {
-      return JsonSerializer.Deserialize<List<Sale>>(response.Content);
-    }
-  }
 }
