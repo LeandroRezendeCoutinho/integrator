@@ -14,7 +14,7 @@ namespace Integrator.WebService
                 var stream = response.Content.ReadAsStringAsync().Result;
 
                 return JsonSerializer.Deserialize<List<Sale>>(stream);
-            }            
+            }
         }
     }
 }
