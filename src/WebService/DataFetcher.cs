@@ -6,12 +6,12 @@ namespace Integrator.WebService
 {
     class DataFetcher
     {
-        public List<Sale> FetchData()
+        public async System.Threading.Tasks.Task<List<Sale>> FetchDataAsync()
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync("http://localhost:4567/data").Result;
-                var stream = response.Content.ReadAsStringAsync().Result;
+                var response = await client.GetAsync("http://localhost:4567/data");
+                var stream = await response.Content.ReadAsStringAsync();
 
                 return JsonSerializer.Deserialize<List<Sale>>(stream);
             }

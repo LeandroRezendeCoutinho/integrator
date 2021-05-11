@@ -9,11 +9,10 @@ namespace Integrator.WebService
     {
         public async Task<HttpResponseMessage> Send(List<Sale> list)
         {
-            HttpResponseMessage response;
             using (var client = new HttpClient())
             {
                 var content = JsonContent.Create(list);
-                return response = await client.PostAsync("http://localhost:4567/receive", content);
+                return await client.PostAsync("http://localhost:4567/receive", content);
             }
         }
     }
